@@ -1,0 +1,27 @@
+Routing VM 1/Client : 
+sudo ip route add 192.168.1.4 via 192.168.1.3
+
+TCP DUMP : 
+sudo tcpdump -i enp0s8 tcp -v
+
+VM3 (Server) echconfig.pem / ecl = AD7+DQA6lQAgACByXLAMZSWNuESobpV3tNfbDT//HfHLaAT6dI68ilZTVQAEAAEAAQALZXhhbXBsZS5jb20AAA==
+
+export LD_LIBRARY_PATH=$HOME/code/openssl
+
+/root/code/curl/src/curl --ech ecl:AD7+DQA6lQAgACByXLAMZSWNuESobpV3tNfbDT//HfHLaAT6dI68ilZTVQAEAAEAAQALZXhhbXBsZS5jb20AAA== --connect-to foo.example.com:443:192.168.1.1:443 https://foo.example.com/index.html -k -vvv
+
+/root/code/curl/src/curl --ech ecl:AD7+DQA6lQAgACByXLAMZSWNuESobpV3tNfbDT//HfHLaAT6dI68ilZTVQAEAAEAAQALZXhhbXBsZS5jb20AAA== --connect-to example.com:443:192.168.1.4:443 https://example.com/index.html -k -vvv
+
+nginx/server :
+~/code/nginx/objs/nginx -c nginxmin.conf
+
+packet trace, vm2/firewall vm3/server :
+sudo tcpdump -i enp0s8 tcp
+~/code/nginx/objs/nginx -c nginxmin.conf
+
+///
+
+CERT INFO 
+
+example.com
+serial : c7:fe:8a:9d:cd:07:06:3b:1f:46:e6:d6:af:21:81:14:4c:cf:17:97
